@@ -2,15 +2,15 @@
 const express = require("express");
 const cors = require("cors");
 let products = require("./products");
+const bodyParser = require("body-parser");
+const slugify = require("slugify");
 
 const app = express();
 
-app.use(cors());
+//Note: Make sure to call app.use before your routes so that it will be applied to all routes.
+app.use(bodyParser.json());
 
-// app.get("/", (request, response) => {
-//   console.log("HELLO");
-//   response.json({ message: "Hello World" });
-// });
+app.use(cors());
 
 //Routes
 app.get("/products", (req, res) => {
@@ -29,6 +29,16 @@ app.delete("/products/:productSlug", (req, res) => {
   } else {
     res.status(404).json({ message: "Product not found." });
   }
+});
+
+app.post("/products", (req, res) => {
+  const id = products[products.length - 1].id + 1;
+  const slug = slugify(req.body.name, { lower: true });
+  // id, slug are equivalent to id: id, slug: slug
+  const newProduct = { id, slug, ...req.body };
+  products.push(newProduct);
+  res.json(newProduct);
+  res.status(201).json(newProduct);
 });
 
 app.listen(8000, () => {
