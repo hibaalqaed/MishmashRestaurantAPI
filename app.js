@@ -17,15 +17,15 @@ app.get("/products", (req, res) => {
   res.json(products);
 });
 
-app.delete("/products/:productId", (req, res) => {
+app.delete("/products/:productSlug", (req, res) => {
   // const productId = req.params.productId; same as:
-  const { productId } = req.params;
-  const foundProduct = products.find((product) => product.id === +productId);
+  const { productSlug } = req.params;
+  const foundProduct = products.find((product) => product.slug === productSlug);
   if (foundProduct) {
-    products = products.filter((products) => products.id !== +productId);
+    products = products.filter((products) => products.slug !== productSlug);
     // res.status(204);
     // res.end(); same as:
-    res.status(204).res.end();
+    res.status(204).end();
   } else {
     res.status(404).json({ message: "Product not found." });
   }
