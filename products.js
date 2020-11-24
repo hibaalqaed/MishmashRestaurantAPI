@@ -8,7 +8,7 @@ const products = [
     name: "Original Fries",
     slug: "original-fries",
     description: "Original Fries",
-    price: "KWD " + 0.65,
+    price: 0.65,
     // image: fries,
   },
 
@@ -17,7 +17,7 @@ const products = [
     name: "Classic Chicken Fillet",
     slug: "classic-chicken-fillet",
     description: "Chicken breast, American cheese, lettuce, mayonaise",
-    price: "KWD " + 1.8,
+    price: 1.8,
     // image: chickenFillet,
   },
 
@@ -26,7 +26,7 @@ const products = [
     name: "Mishmash Mojito",
     slug: "mishmash-mojito",
     description: "Lime and Mint Mojito",
-    price: "KWD " + 1.0,
+    price: 1.0,
     // image: mojito,
   },
 ];
