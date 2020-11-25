@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const productRoutes = require("./routes/products");
+const db = require("./db/models");
 
 const app = express();
 
@@ -12,6 +13,17 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/products", productRoutes);
 
-app.listen(8000, () => {
-  console.log("The application is running on localhost:8000");
-});
+const run = async () => {
+  try {
+    await db.sequelize.authenticate();
+    console.log("Connection to the database successful!");
+  } catch (error) {
+    console.error("Error connecting to the database: ", error);
+  }
+
+  await app.listen(8000, () => {
+    console.log("The application is running on localhost:8000");
+  });
+};
+
+run();
