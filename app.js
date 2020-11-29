@@ -15,7 +15,7 @@ app.use("/products", productRoutes);
 
 const run = async () => {
   try {
-    await db.sequelize.authenticate();
+    await db.sequelize.sync({ alter: true });
     console.log("Connection to the database successful!");
   } catch (error) {
     console.error("Error connecting to the database: ", error);
