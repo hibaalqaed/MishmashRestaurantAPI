@@ -6,9 +6,24 @@ const {
   productList,
   productUpdate,
   productDelete,
+  fetchProduct,
 } = require("../controllers/productController");
 
-/***** Routes *****/
+//Router Param
+router.param("productId", async (req, res, next, productIdVariable) => {
+  const product = await fetchProduct(productIdVariable, next);
+  if (product) {
+    req.product = product;
+    next();
+  } else {
+    const err = {
+      status: 404,
+      message: "Product not found.",
+    };
+    next(err);
+  }
+});
+
 //Product List
 router.get("/", productList);
 
