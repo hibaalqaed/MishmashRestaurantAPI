@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const productRoutes = require("./routes/products");
 const db = require("./db/models");
+const path = require("path");
 
 const app = express();
 
@@ -11,7 +12,10 @@ const app = express();
 app.use(cors());
 //Note: Make sure to call app.use before your routes so that it will be applied to all routes.
 app.use(bodyParser.json());
+
+//Routes
 app.use("/products", productRoutes);
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 //NOT FOUND PATH MIDDLEWARE
 app.use((req, res, next) => {

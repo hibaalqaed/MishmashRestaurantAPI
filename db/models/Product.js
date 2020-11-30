@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     slug: {
       type: DataTypes.STRING,
-      allowNull: true,
+      unique: true,
     },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       defaultValue: 5,
       validate: {
         min: 1,
@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
   });
 
