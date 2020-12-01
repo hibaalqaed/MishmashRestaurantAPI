@@ -2,7 +2,10 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+//Routes
+const branchRoutes = require("./routes/branches");
 const productRoutes = require("./routes/products");
+
 const db = require("./db/models");
 const path = require("path");
 
@@ -14,6 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Routes
+app.use("/branches", branchRoutes);
 app.use("/products", productRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
 
