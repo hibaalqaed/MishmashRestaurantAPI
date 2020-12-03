@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {
-  productCreate,
   productList,
   productUpdate,
   productDelete,
@@ -29,9 +28,6 @@ router.get("/", productList);
 
 //Product Delete
 router.delete("/:productId", productDelete);
-
-//Product Create
-router.post("/", upload.single("image"), productCreate);
 
 //Product Update
 router.put("/:productId", upload.single("image"), productUpdate);

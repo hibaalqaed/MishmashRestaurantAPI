@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DOUBLE,
       defaultValue: 5,
       validate: {
-        min: 1,
+        min: 0.1,
       },
     },
     image: {
