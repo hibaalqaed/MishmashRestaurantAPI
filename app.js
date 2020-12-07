@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 //Routes
 const branchRoutes = require("./routes/branches");
 const productRoutes = require("./routes/products");
+const userRoutes = require("./routes/users");
 
 const db = require("./db/models");
 const path = require("path");
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use("/branches", branchRoutes);
 app.use("/products", productRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
+app.use(userRoutes);
 
 //NOT FOUND PATH MIDDLEWARE
 app.use((req, res, next) => {
