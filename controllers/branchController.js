@@ -14,7 +14,7 @@ exports.fetchBranch = async (branchId, next) => {
 exports.branchList = async (req, res, next) => {
   try {
     const branches = await Branch.findAll({
-      attributes: ["id", "name"],
+      attributes: ["id", "name", "slug", "image"],
       include: [
         {
           model: Product,

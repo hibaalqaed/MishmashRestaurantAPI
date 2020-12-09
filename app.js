@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const branchRoutes = require("./routes/branches");
 const productRoutes = require("./routes/products");
 const userRoutes = require("./routes/users");
+//Middleware
+const passport = require("passport");
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
 
 const db = require("./db/models");
 const path = require("path");
@@ -16,6 +19,10 @@ const app = express();
 app.use(cors());
 //Note: Make sure to call app.use before your routes so that it will be applied to all routes.
 app.use(bodyParser.json());
+// Passport Setup
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //Routes
 app.use("/branches", branchRoutes);

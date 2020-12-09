@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 const {
   branchCreate,
@@ -27,9 +28,15 @@ router.param("branchId", async (req, res, next, branchIdVariable) => {
 router.get("/", branchList);
 
 //Branch Create
-router.post("/", upload.single("image"), branchCreate);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  branchCreate
+);
 
 //Product Create
 router.post("/:branchId/products", upload.single("image"), productCreate);
+passport.authenticate("jwt", { session: false });
 
 module.exports = router;
