@@ -1,7 +1,7 @@
 const SequelizeSlugify = require("sequelize-slugify");
 
 module.exports = (sequelize, DataTypes) => {
-  const Branch = sequelize.define("Branch", {
+  const Category = sequelize.define("Category", {
     name: {
       type: DataTypes.STRING,
     },
@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  SequelizeSlugify.slugifyModel(Branch, {
+  SequelizeSlugify.slugifyModel(Category, {
     source: ["name"],
   });
 
-  return Branch;
+  return Category;
 };

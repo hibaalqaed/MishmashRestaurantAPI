@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 //Routes
-const branchRoutes = require("./routes/branches");
+const categoryRoutes = require("./routes/categories");
 const productRoutes = require("./routes/products");
 const userRoutes = require("./routes/users");
 //Middleware
@@ -25,7 +25,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //Routes
-app.use("/branches", branchRoutes);
+app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(userRoutes);

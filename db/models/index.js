@@ -44,15 +44,15 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Relations
-// A Branch has many Products
-db.Branch.hasMany(db.Product, {
+// A Category has many Products
+db.Category.hasMany(db.Product, {
   as: "products",
-  foreignKey: { fieldName: "branchId", allowNull: false },
+  foreignKey: { fieldName: "categoryId", allowNull: false },
 });
 
-// A Product belongs to one Branch only
-db.Product.belongsTo(db.Branch, {
-  as: "branch",
+// A Product belongs to one Category only
+db.Product.belongsTo(db.Category, {
+  as: "category",
 });
 
 module.exports = db;

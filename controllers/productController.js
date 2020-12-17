@@ -1,4 +1,4 @@
-const { Branch, Product } = require("../db/models");
+const { Category, Product } = require("../db/models");
 
 // I am not a middleware, i'm a regular function
 exports.fetchProduct = async (productId, next) => {
@@ -14,10 +14,10 @@ exports.fetchProduct = async (productId, next) => {
 exports.productList = async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      attributes: { exclude: ["branchId", "createdAt", "updatedAt"] },
+      attributes: { exclude: ["categoryId", "createdAt", "updatedAt"] },
       include: {
-        model: Branch,
-        as: "branch",
+        model: Category,
+        as: "category",
         attributes: ["name"],
       },
     });

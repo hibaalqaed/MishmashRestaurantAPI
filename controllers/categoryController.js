@@ -1,19 +1,19 @@
-const { Branch, Product } = require("../db/models");
+const { Category, Product } = require("../db/models");
 
 // I am not a middleware, i'm a regular function
-exports.fetchBranch = async (branchId, next) => {
+exports.fetchCategory = async (categoryId, next) => {
   try {
-    const foundBranch = await Branch.findByPk(branchId);
-    return foundBranch;
+    const foundCategory = await Category.findByPk(categoryId);
+    return foundCategory;
   } catch (error) {
     next(error);
   }
 };
 
-//Branch List
-exports.branchList = async (req, res, next) => {
+// Category List
+exports.categoryList = async (req, res, next) => {
   try {
-    const branches = await Branch.findAll({
+    const categories = await Category.findAll({
       attributes: ["id", "name", "slug", "image"],
       include: [
         {
@@ -23,20 +23,20 @@ exports.branchList = async (req, res, next) => {
         },
       ],
     });
-    res.json(branches);
+    res.json(categories);
   } catch (error) {
     next(error);
   }
 };
 
-//Branch Create
-exports.branchCreate = async (req, res, next) => {
+// Category Create
+exports.categoryCreate = async (req, res, next) => {
   try {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
-    const newBranch = await Branch.create(req.body);
-    res.status(201).json(newBranch);
+    const newCategory = await Category.create(req.body);
+    res.status(201).json(newCategory);
   } catch (error) {
     next(error);
   }
@@ -48,8 +48,7 @@ exports.productCreate = async (req, res, next) => {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
-    // from warehouse ? req.body.bakeryId = req.bakery.id; ??
-    req.body.branchId = req.params.branchId;
+    req.body.categoryId = req.params.categoryId;
     const newProduct = await Product.create(req.body);
     res.status(201).json(newProduct);
   } catch (error) {
